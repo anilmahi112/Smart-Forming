@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌿 Smart Farming Dashboard</title>
+<style>
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #a8e063, #56ab2f);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  color: #0b3d1f;
+}
+
+/* White Card */
+.card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  padding: 40px 30px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.95);}
+  to {opacity: 1; transform: scale(1);}
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1b5e20;
+  margin-bottom: 25px;
+}
+
+/* Green Buttons */
+.btn {
+  width: 100%;
+  padding: 14px 0;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-green {
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  box-shadow: 0 5px 12px rgba(46, 204, 113, 0.4);
+}
+.btn-green:hover {
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+/* Logout button */
+.logout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(90deg, #607d8b, #455a64);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  margin-top: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+.logout:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+.logout span {
+  font-size: 18px;
+}
+
+/* Mobile view */
+@media (max-width: 500px) {
+  .card {
+    padding: 30px 20px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  .btn {
+    font-size: 16px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>🌿 Smart Farming Dashboard</h1>
+
+  <button class="btn btn-green" onclick="go('vehicle.html')">Vehicle Control</button>
+  <button class="btn btn-green" onclick="go('plant.html')">Plant Monitoring</button>
+  <button class="btn btn-green" onclick="go('Live.html')">Live Streaming</button>
+  <button class="logout" onclick="go('smart_farming.html')">
+    <span></span> Logout
+  </button>
+</div>
+
+<script>
+function go(page){
+  window.location.href = page;
+}
+</script>
+
+</body>
+</html>

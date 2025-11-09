@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌾 Smart Farming Login</title>
+<style>
+:root {
+  --green1: #27ae60;
+  --green2: #2ecc71;
+  --dark: #145a32;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #a8e063, #56ab2f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: var(--dark);
+  margin: 0;
+}
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: center;
+  width: 350px;
+  animation: fadeIn 0.6s ease;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+h2 {margin-bottom: 20px; color: #1e4620;}
+.field {
+  margin: 12px 0; text-align: left;
+}
+.field label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #444;
+}
+.field input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cce3cc;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, var(--green1), var(--green2));
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.btn:hover {transform: scale(1.05);}
+.link {
+  display: block;
+  margin-top: 10px;
+  color: var(--green1);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.hidden {display: none;}
+.msg {margin-top: 10px; font-size: 13px;}
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- LOGIN -->
+  <div id="loginPage">
+    <h2>🌾 Smart Farming Login</h2>
+    <div class="field">
+      <label>Gmail</label>
+      <input type="email" id="loginEmail" placeholder="Enter your Gmail">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="Enter your Password">
+    </div>
+    <button class="btn" onclick="login()">Login</button>
+    <p class="msg" id="loginMsg"></p>
+    <span class="link" onclick="showCreate()">Create Account</span>
+    <span class="link" onclick="showForgot()">Forgot Password?</span>
+  </div>
+
+  <!-- CREATE ACCOUNT -->
+  <div id="createPage" class="hidden">
+    <h2>Create Account</h2>
+    <div class="field"><label>Full Name</label><input type="text" id="newName"></div>
+    <div class="field"><label>Gmail</label><input type="email" id="newEmail"></div>
+    <div class="field"><label>Password</label><input type="password" id="newPass"></div>
+    <div class="field"><label>What is your favorite person?</label><input type="text" id="newAnswer"></div>
+    <button class="btn" onclick="createAccount()">Create Account</button>
+    <p class="msg" id="createMsg"></p>
+    <span class="link" onclick="showLogin()">⬅ Back to Login</span>
+  </div>
+
+  <!-- FORGOT PASSWORD -->
+  <div id="forgotPage" class="hidden">
+    <h2>Forgot Password</h2>
+    <div class="field"><label>Gmail</label><input type="email" id="forgotEmail"></div>
+    <div class="field"><label>Who are you?</label><input type="text" id="forgotAnswer"></div>
+    <button class="btn" onclick="resetPassword()">Recover Password</button>
+    <p class="msg" id="forgotMsg"></p>
+    <span class="link" onclick="showLogin()">⬅ Back to Login</span>
+  </div>
+</div>
+
+<script>
+let users = [{name:"Anil", email:"anilmahi822@gmail.com", pass:"Anil@6364", answer:"anil"}];
+
+// Switch Pages
+function showCreate(){toggle("loginPage","createPage");}
+function showForgot(){toggle("loginPage","forgotPage");}
+function showLogin(){toggle("createPage","loginPage");toggle("forgotPage","loginPage");}
+function toggle(hide,show){document.getElementById(hide).classList.add("hidden");document.getElementById(show).classList.remove("hidden");}
+
+// Create Account
+function createAccount(){
+  const n=newName.value.trim(),e=newEmail.value.trim(),p=newPass.value.trim(),a=newAnswer.value.trim().toLowerCase();
+  if(!n||!e||!p||!a){createMsg.textContent="❌ Fill all fields.";createMsg.style.color="red";return;}
+  users.push({name:n,email:e,pass:p,answer:a});
+  createMsg.textContent="✅ Account Created!";createMsg.style.color="green";
+  setTimeout(showLogin,1500);
+}
+
+// Login
+function login(){
+  const e=loginEmail.value.trim(),p=loginPass.value.trim();
+  const u=users.find(x=>x.email===e&&x.pass===p);
+  if(u){window.location.href="dashboard.html";}
+  else{loginMsg.textContent="❌ Invalid Email or Password.";loginMsg.style.color="red";}
+}
+
+// Forgot Password
+function resetPassword(){
+  const e=forgotEmail.value.trim(),a=forgotAnswer.value.trim().toLowerCase();
+  const u=users.find(x=>x.email===e&&x.answer===a);
+  if(u){forgotMsg.innerHTML=`✅ Your password is: <b>${u.pass}</b>`;forgotMsg.style.color="green";}
+  else{forgotMsg.textContent="❌ Incorrect Answer or Gmail.";forgotMsg.style.color="red";}
+}
+</script>
+</body>
+</html>

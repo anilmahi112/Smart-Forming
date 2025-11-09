@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plant Monitoring – Smart Farming</title>
+<style>
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #a8e063, #56ab2f);
+  text-align: center;
+  color: #0b3d1f;
+  padding: 30px;
+}
+.card {
+  background: rgba(255,255,255,0.9);
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  display: inline-block;
+  padding: 25px;
+}
+h1 {margin-bottom: 20px;}
+.value {font-size: 20px; font-weight: 600; margin: 8px 0;}
+.servo {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.9);
+  padding: 15px;
+  border-radius: 10px;
+}
+input[type=range]{width: 250px; accent-color: #2ecc71;}
+.angle-display {font-weight: 600; margin-top: 6px;}
+button {
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:hover {transform: scale(1.05);}
+.back {background: linear-gradient(90deg, #607d8b, #455a64);}
+</style>
+</head>
+<body>
+<h1>Plant Monitoring Dashboard</h1>
+<div class="card">
+  <div class="value">Temperature: <span id="temp">--</span> °C</div>
+  <div class="value">Humidity: <span id="hum">--</span> %</div>
+  <div class="value">Soil Moisture: <span id="soil">--</span> %</div>
+  <div class="value">Condition: <span id="cond">--</span>%</div>
+
+  <div class="servo">
+    <label>Servo 2 Angle (0°–180°)</label><br>
+    <input type="range" id="servo2" min="0" max="180" value="180" oninput="updateServo('servo2',this.value)">
+    <div class="angle-display" id="servo2Text">Angle: 180°</div>
+  </div>
+
+  <div class="servo">
+    <label>Servo 3 Angle (0°–180°)</label><br>
+    <input type="range" id="servo3" min="0" max="180" value="180" oninput="updateServo('servo3',this.value)">
+    <div class="angle-display" id="servo3Text">Angle: 180°</div>
+  </div>
+
+  <button onclick="updateData()">Refresh</button>
+  <button class="back" onclick="goBack()">Dashboard</button>
+</div>
+
+<script>
+function updateData(){
+  const t=(20+Math.random()*8).toFixed(1);
+  const h=(45+Math.random()*20).toFixed(0);
+  const s=(30+Math.random()*40).toFixed(0);
+  const c=s>55?"Wet Soil":"Dry Soil";
+  temp.textContent=t;hum.textContent=h;soil.textContent=s;cond.textContent=c;
+}
+function updateServo(id,val){document.getElementById(id+"Text").textContent="Angle: "+val+"°";}
+function goBack(){window.location.href="dashboard.html";}
+updateData();
+</script>
+</body>
+</html>
